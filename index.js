@@ -39,10 +39,12 @@ function closeMenuMobile() {
 
 ////////////////////////////////         Gallery              /////////////////////////
 
-const images = [...document.querySelectorAll(".image")];
+const ornithologyImages = [...document.querySelectorAll(".ornithology")];
+const landscapesImages = [...document.querySelectorAll(".landscapes")];
+const archeologyImages = [...document.querySelectorAll(".archeology")];
+const animalsImages = [...document.querySelectorAll(".animals")];
 
 // popup
-
 const popup = document.querySelector(".popup");
 const closeBtn = document.querySelector(".close-btn");
 const imageName = document.querySelector(".image-name");
@@ -51,45 +53,149 @@ const imageIndex = document.querySelector(".index");
 const leftArrow = document.querySelector(".left-arrow");
 const rightArrow = document.querySelector(".right-arrow");
 const galleryImage = document.querySelector(".gallery-image");
-const tableauBird = ["Bernache", "Krusty", "girouette", "violon"];
 const overlay = document.querySelector(".overlay");
 const valueBird = document.querySelector("value-Bird");
 
 let index = 0; // will track our current image;
 
-images.forEach((item, i) => {
+///////////////////////////////////    Slider Ornithology   /////////////////////////////////
+
+ornithologyImages.forEach((item, i) => {
   item.addEventListener("click", () => {
-    updateImage(i);
+    updateOrnithologyImage(i);
     popup.classList.toggle("active");
     overlay.classList.toggle("open");
   });
 });
-
-function updateImage(i) {
-  let path = `ressources/images/img${i + 1}.png`;
-  largeImage.src = path;
-  imageName.innerHTML = tableauBird[i];
+function updateOrnithologyImage(i) {
+  largeImage.src = ornithologyImages[i].src;
+  let encodedFilename = ornithologyImages[i].src.split('/').pop().replace(/\.(png|webp|JPG)/i, '');
+  let decodedFilename = decodeURIComponent(encodedFilename); // Décoder la chaîne de nom de fichier
+  imageName.innerHTML = decodedFilename.replace(/\d/g, '').replace(/_/g, ' '); // Remplacer tous les _ par un espace
   index = i;
 }
+function closePopup() {
+  popup.classList.remove("active");
+  overlay.classList.remove("open");
+}
+function imageOrnithologyPrecedente() {
+  if (index > 0) {
+    updateOrnithologyImage(index - 1);
+  } else {
+    updateOrnithologyImage(ornithologyImages.length - 1);
+  }
+}
+function imageOrnithologySuivante() {
+  if (index < ornithologyImages.length - 1) {
+    updateOrnithologyImage(index + 1);
+  } else {
+    updateLandscapesImage(0);
+  }
+}
 
-galleryImage.addEventListener("mouseover", () => {
-  valueBird.innerHTML = currentText;
+// ///////////////////////////////////    Slider Landcapes   /////////////////////////////////
+
+landscapesImages.forEach((item, i) => {
+  item.addEventListener("click", () => {
+    updateLandscapesImage(i);
+    popup.classList.toggle("active");
+    overlay.classList.toggle("open");
+  });
 });
+function updateLandscapesImage(i) {
+  largeImage.src = landscapesImages[i].src;
+  let encodedFilename = landscapesImages[i].src.split('/').pop().replace(/\.(png|webp|JPG)/i, '');
+  let decodedFilename = decodeURIComponent(encodedFilename); // Décoder la chaîne de nom de fichier
+  imageName.innerHTML = decodedFilename.replace(/\d/g, '').replace(/_/g, ' '); // Remplacer tous les _ par un espace
+  index = i;
+}
 
 function closePopup() {
   popup.classList.remove("active");
   overlay.classList.remove("open");
 }
-
-function imagePrecedente() {
+function imageLandscapesPrecedente() {
   if (index > 0) {
-    updateImage(index - 1);
+    updateLandscapesImage(index - 1);
+  } else {
+    updateLandscapesImage(landscapesImages.length - 1);
+  }
+}
+function imageLandscapesSuivante() {
+  if (index < landscapesImages.length - 1) {
+    updateLandscapesImage(index + 1);
+  } else {
+    updateLandscapesImage(0);
   }
 }
 
-function imageSuivante() {
-  if (index < images.length - 1) {
-    updateImage(index + 1);
+///////////////////////////////////    Slider Archeology   /////////////////////////////////
+
+archeologyImages.forEach((item, i) => {
+  item.addEventListener("click", () => {
+    updateArcheologyImage(i);
+    popup.classList.toggle("active");
+    overlay.classList.toggle("open");
+  });
+});
+function updateArcheologyImage(i) {
+  largeImage.src = archeologyImages[i].src;
+  let encodedFilename = archeologyImages[i].src.split('/').pop().replace(/\.(png|webp|JPG)/i, '');
+  let decodedFilename = decodeURIComponent(encodedFilename); // Décoder la chaîne de nom de fichier
+  imageName.innerHTML = decodedFilename.replace(/\d/g, '').replace(/_/g, ' '); // Remplacer tous les _ par un espace
+  index = i;
+}
+function closePopup() {
+  popup.classList.remove("active");
+  overlay.classList.remove("open");
+}
+function imageArcheologyPrecedente() {
+  if (index > 0) {
+    updateArcheologyImage(index - 1);
+  } else {
+    updateArcheologyImage(archeologyImages.length - 1);
+  }
+}
+function imageArcheologySuivante() {
+  if (index < archeologyImages.length - 1) {
+    updateArcheologyImage(index + 1);
+  } else {
+    updateArcheologyImage(0);
+  }
+}
+
+///////////////////////////////////    Slider Animals   /////////////////////////////////
+
+animalsImages.forEach((item, i) => {
+  item.addEventListener("click", () => {
+    updateAnimalsImage(i);
+    popup.classList.toggle("active");
+    overlay.classList.toggle("open");
+  });
+});
+function updateAnimalsImage(i) {
+  largeImage.src = animalsImages[i].src;
+  let encodedFilename = animalsImages[i].src.split('/').pop().replace(/\.(png|webp|JPG)/i, '');
+  let decodedFilename = decodeURIComponent(encodedFilename); // Décoder la chaîne de nom de fichier
+  imageName.innerHTML = decodedFilename.replace(/\d/g, '').replace(/_/g, ' '); // Remplacer tous les _ par un espace
+  index = i;
+}
+function closePopup() {
+  popup.classList.remove("active");
+  overlay.classList.remove("open");
+}
+function imageAnimalsPrecedente() {
+  if (index > 0) {
+    updateAnimalsImage(index - 1);
+  } else {
+    updateAnimalsImage(animalsImages.length - 1);
+  }
+}
+function imageAnimalsSuivante() {
+  if (index < animalsImages.length - 1) {
+    updateAnimalsImage(index + 1);
+  } else {
+    updateAnimalsImage(0);
   }
 }
 
